@@ -3,9 +3,11 @@ package topicmanager.backend.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import topicmanager.backend.model.Status;
 import topicmanager.backend.model.Task;
 import topicmanager.backend.repository.TaskRepository;
 
+import java.time.Instant;
 import java.util.List;
 
 @Service
@@ -13,8 +15,10 @@ import java.util.List;
 public class TaskService {
     private final TaskRepository taskRepository;
 
-    public void save(Task task) {
-        taskRepository.save(task);
+    public Task save(Task task) {
+        task.setStatus(Status.PENDING);
+        task.setCreatedAt(Instant.now());
+        return taskRepository.save(task);
     }
 
 
