@@ -2,15 +2,14 @@ package topicmanager.backend.controller;
 
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import topicmanager.backend.dto.TaskCreateDto;
 import topicmanager.backend.dto.TaskResponseDto;
 import topicmanager.backend.mapper.TaskMapper;
 import topicmanager.backend.model.Task;
 import topicmanager.backend.service.TaskService;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/tasks")
@@ -25,5 +24,12 @@ public class TaskController {
         Task task = taskMapper.toEntity(taskCreateDto);
         Task savedTask = taskService.save(task);
         return taskMapper.toDto(savedTask);
+    }
+
+
+    @GetMapping()
+    public List<TaskResponseDto> getAllTasks() {
+        List<Task> tasks = taskService.findAll();
+        return taskMapper.toDto(tasks);
     }
 }

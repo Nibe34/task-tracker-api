@@ -34,7 +34,7 @@ public class InitiateUtils implements CommandLineRunner {
 
 
         taskService.save(task1);
-        taskService.save(task1);
+        taskService.save(task2);
 
 
         List<Task> tasks = taskService.findAll();
