@@ -2,6 +2,7 @@ package topicmanager.backend.controller;
 
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import topicmanager.backend.dto.TaskCreateDto;
 import topicmanager.backend.dto.TaskResponseDto;
@@ -31,5 +32,26 @@ public class TaskController {
     public List<TaskResponseDto> getAllTasks() {
         List<Task> tasks = taskService.findAll();
         return taskMapper.toDto(tasks);
+    }
+
+
+    @GetMapping("/{id}")
+    public TaskResponseDto getTaskById(@PathVariable Long id) {
+        Task task = taskService.findById(id);
+        return taskMapper.toDto(task);
+    }
+
+
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteTask(@PathVariable Long id) {
+        taskService.delete(id);
+    }
+
+
+    @PutMapping("/{id}")
+    public TaskResponseDto updateTask(@PathVariable Long id, @RequestBody TaskCreateDto taskCreateDto) {
+        Task updatedTask = taskService.update(id, taskCreateDto);
+        return taskMapper.toDto(updatedTask);
     }
 }
