@@ -1,6 +1,7 @@
 package topicmanager.backend.controller;
 
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -21,7 +22,7 @@ public class TaskController {
 
 
     @PostMapping()
-    public TaskResponseDto createTask(@RequestBody TaskCreateDto taskCreateDto) {
+    public TaskResponseDto createTask(@RequestBody @Valid TaskCreateDto taskCreateDto) {
         Task task = taskMapper.toEntity(taskCreateDto);
         Task savedTask = taskService.save(task);
         return taskMapper.toDto(savedTask);
@@ -50,7 +51,7 @@ public class TaskController {
 
 
     @PutMapping("/{id}")
-    public TaskResponseDto updateTask(@PathVariable Long id, @RequestBody TaskCreateDto taskCreateDto) {
+    public TaskResponseDto updateTask(@PathVariable Long id, @RequestBody @Valid TaskCreateDto taskCreateDto) {
         Task updatedTask = taskService.update(id, taskCreateDto);
         return taskMapper.toDto(updatedTask);
     }
