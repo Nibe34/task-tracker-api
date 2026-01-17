@@ -36,4 +36,20 @@ public class GlobalExceptionHandler {
         erorResponse.put("error", ex.getMessage());
         return new ResponseEntity<>(erorResponse, HttpStatus.NOT_FOUND);
     }
+
+
+    @ExceptionHandler(InvalidTaskStatusTransitionException.class)
+    public ResponseEntity<Map<String, String>> handleInvalidTaskStatusTransitionException(InvalidTaskStatusTransitionException ex) {
+        Map<String, String> erorResponse = new HashMap<>();
+        erorResponse.put("error", ex.getMessage());
+        return new ResponseEntity<>(erorResponse, HttpStatus.BAD_REQUEST);
+    }
+
+
+    @ExceptionHandler(CannotEditTaskInCurrentStatusException.class)
+    public ResponseEntity<Map<String, String>> handleCannotChangeCompletedTaskException(CannotEditTaskInCurrentStatusException ex) {
+        Map<String, String> erorResponse = new HashMap<>();
+        erorResponse.put("error", ex.getMessage());
+        return new ResponseEntity<>(erorResponse, HttpStatus.BAD_REQUEST);
+    }
 }

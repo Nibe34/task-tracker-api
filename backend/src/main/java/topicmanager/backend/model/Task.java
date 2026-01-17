@@ -3,7 +3,9 @@ package topicmanager.backend.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
-import org.apache.catalina.User;
+import org.hibernate.annotations.CreationTimestamp;
+import topicmanager.backend.exception.CannotEditTaskInCurrentStatusException;
+import topicmanager.backend.exception.InvalidTaskStatusTransitionException;
 
 import java.time.Instant;
 
@@ -15,12 +17,60 @@ public class Task {
     @Column(name = "id_title")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @Column
     private String title;
+
     @Column
     private String description;
+
+    @Enumerated(EnumType.STRING)
     @Column
     private Status status;
-    @Column
+
+    @CreationTimestamp
+    @Column(updatable = false, nullable = false)
     private Instant createdAt;
+
+    @Column
+    private Instant completedAt;
+
+
+
+
+    public void changeStatus(Status newStatus) {
+        if (newStatus == this.status) {
+            return;
+        }
+
+        if (!this.status.isValidTransition(newStatus)) {
+            throw new InvalidTaskStatusTransitionException(this.status, newStatus);
+        }
+
+        this.status = newStatus;
+
+        if (newStatus == Status.DONE && this.completedAt == null) {
+            this.completedAt = Instant.now();
+        }
+    }
+
+
+
+
+    public void changeTitle(String newTitle) {
+        if (!this.status.isEditable()) {
+            throw new CannotEditTaskInCurrentStatusException("title", this.id);
+        }
+        this.title = newTitle;
+    }
+
+
+
+
+    public void changeDescription(String newDescription) {
+        if (!this.status.isEditable()) {
+            throw new CannotEditTaskInCurrentStatusException("description", this.id);
+        }
+        this.description = newDescription;
+    }
 }
