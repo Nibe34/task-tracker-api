@@ -6,7 +6,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import topicmanager.backend.dto.TaskCreateDto;
+import topicmanager.backend.dto.TaskUpdateDto;
 import topicmanager.backend.dto.TaskResponseDto;
+import topicmanager.backend.dto.TaskStatusUpdateDto;
 import topicmanager.backend.mapper.TaskMapper;
 import topicmanager.backend.model.Task;
 import topicmanager.backend.service.TaskService;
@@ -49,10 +51,27 @@ public class TaskController {
         taskService.delete(id);
     }
 
+/*
+// TODO: оскільки є patch, то поки цей функціонал лише порушує логіку системи обходячи доменні правила.
+         в майбутньому можливо видалити чи зробити доступним лише для адміністраторів
 
     @PutMapping("/{id}")
     public TaskResponseDto updateTask(@PathVariable Long id, @RequestBody @Valid TaskCreateDto taskCreateDto) {
         Task updatedTask = taskService.update(id, taskCreateDto);
+        return taskMapper.toDto(updatedTask);
+    }
+*/
+
+    @PatchMapping("/{id}/status")
+    public TaskResponseDto updateTaskStatus(@PathVariable Long id, @RequestBody @Valid TaskStatusUpdateDto taskStatusUpdateDto) {
+        Task updatedTask = taskService.updateStatus(id, taskStatusUpdateDto.status());
+        return taskMapper.toDto(updatedTask);
+    }
+
+
+    @PatchMapping("/{id}")
+    public TaskResponseDto updateTask(@PathVariable Long id, @RequestBody @Valid TaskUpdateDto taskUpdateDto) {
+        Task updatedTask = taskService.patchTask(id, taskUpdateDto);
         return taskMapper.toDto(updatedTask);
     }
 }

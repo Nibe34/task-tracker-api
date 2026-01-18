@@ -10,6 +10,7 @@ public record TaskResponseDto(
         String title,
         String description,
         Status status,
-        Instant createdAt
+        Instant createdAt,
+        Instant updatedAt
 ) {
 }

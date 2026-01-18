@@ -5,6 +5,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import topicmanager.backend.dto.TaskCreateDto;
+import topicmanager.backend.dto.TaskUpdateDto;
+import topicmanager.backend.exception.EmptyPatchException;
 import topicmanager.backend.exception.TaskNotFoundException;
 import topicmanager.backend.mapper.TaskMapperImpl;
 import topicmanager.backend.model.Status;
@@ -20,19 +22,21 @@ public class TaskService {
     private final TaskRepository taskRepository;
     private final TaskMapperImpl taskMapperImpl;
 
+    @Transactional
     public Task save(Task task) {
         task.setStatus(Status.TODO);
         return taskRepository.save(task);
     }
 
 
-    public List<Task> findAll() {
-        return taskRepository.findAll();
+    @Transactional
+    public void saveAll(List<Task> tasks) {
+        taskRepository.saveAll(tasks);
     }
 
 
-    public void saveAll(List<Task> tasks) {
-        taskRepository.saveAll(tasks);
+    public List<Task> findAll() {
+        return taskRepository.findAll();
     }
 
 
@@ -65,17 +69,21 @@ public class TaskService {
 
 
     @Transactional
-    public Task updateTitle(Long taskId, String newTitle) {
-        Task task = findById(taskId);
-        task.changeTitle(newTitle);
-        return taskRepository.save(task);
-    }
+    public Task patchTask(Long id, TaskUpdateDto dto) {
+        Task task = findById(id);
 
+        if (dto.title() == null && dto.description() == null) {
+            throw new EmptyPatchException();
+        }
 
-    @Transactional
-    public Task updateDescription(Long taskId, String newDescription) {
-        Task task = findById(taskId);
-        task.changeDescription(newDescription);
+        if (dto.title() != null) {
+            task.changeTitle(dto.title());
+        }
+
+        if (dto.description() != null) {
+            task.changeDescription(dto.description());
+        }
+
         return taskRepository.save(task);
     }
 }

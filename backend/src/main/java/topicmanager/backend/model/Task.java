@@ -59,7 +59,7 @@ public class Task {
 
     public void changeTitle(String newTitle) {
         if (!this.status.isEditable()) {
-            throw new CannotEditTaskInCurrentStatusException("title", this.id);
+            throw new CannotEditTaskInCurrentStatusException(this.id);
         }
         this.title = newTitle;
     }
@@ -69,7 +69,7 @@ public class Task {
 
     public void changeDescription(String newDescription) {
         if (!this.status.isEditable()) {
-            throw new CannotEditTaskInCurrentStatusException("description", this.id);
+            throw new CannotEditTaskInCurrentStatusException(this.id);
         }
         this.description = newDescription;
     }

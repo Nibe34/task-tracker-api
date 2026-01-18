@@ -26,10 +26,10 @@ public class InitiateUtils implements CommandLineRunner {
 
 
         Task task2 = new Task();
-        task1.setTitle("Task 2");
-        task1.setDescription("Task 2");
-        task1.setStatus(Status.IN_PROGRESS);
-        task1.setCreatedAt(Instant.now());
+        task2.setTitle("Task 2");
+        task2.setDescription("Task 2");
+        task2.setStatus(Status.IN_PROGRESS);
+        task2.setCreatedAt(Instant.now());
 
 
 
