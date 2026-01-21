@@ -5,10 +5,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-import topicmanager.backend.dto.TaskCreateDto;
-import topicmanager.backend.dto.TaskUpdateDto;
-import topicmanager.backend.dto.TaskResponseDto;
-import topicmanager.backend.dto.TaskStatusUpdateDto;
+import topicmanager.backend.dto.*;
 import topicmanager.backend.mapper.TaskMapper;
 import topicmanager.backend.model.Task;
 import topicmanager.backend.service.TaskService;
@@ -32,8 +29,8 @@ public class TaskController {
 
 
     @GetMapping()
-    public List<TaskResponseDto> getAllTasks() {
-        List<Task> tasks = taskService.findAll();
+    public List<TaskResponseDto> getAllTasks(@ModelAttribute TaskFilterDto filter) {
+        List<Task> tasks = taskService.searchTasks(filter);
         return taskMapper.toDto(tasks);
     }
 

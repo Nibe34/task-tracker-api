@@ -5,6 +5,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import topicmanager.backend.dto.TaskCreateDto;
+import topicmanager.backend.dto.TaskFilterDto;
 import topicmanager.backend.dto.TaskUpdateDto;
 import topicmanager.backend.exception.EmptyPatchException;
 import topicmanager.backend.exception.TaskNotFoundException;
@@ -37,6 +38,20 @@ public class TaskService {
 
     public List<Task> findAll() {
         return taskRepository.findAll();
+    }
+
+    public List<Task> searchTasks(TaskFilterDto filter) {
+        if (filter == null) {
+            return taskRepository.findAll();
+        }
+
+        String titleParam = null;
+
+        if (filter.title() != null && !filter.title().isBlank()) {
+            titleParam = "%" + filter.title().toLowerCase() + "%";
+        }
+
+        return taskRepository.searchTasks(titleParam, filter.status());
     }
 
 

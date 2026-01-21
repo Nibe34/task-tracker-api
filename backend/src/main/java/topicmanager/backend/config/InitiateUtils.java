@@ -1,4 +1,4 @@
-package topicmanager.backend.util;
+package topicmanager.backend.config;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
