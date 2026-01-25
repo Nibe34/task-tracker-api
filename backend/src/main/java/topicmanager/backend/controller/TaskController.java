@@ -2,19 +2,22 @@ package topicmanager.backend.controller;
 
 
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.Min;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import topicmanager.backend.dto.*;
 import topicmanager.backend.mapper.TaskMapper;
 import topicmanager.backend.model.Task;
 import topicmanager.backend.service.TaskService;
 
-import java.util.List;
 
 @RestController
 @RequestMapping("/tasks")
 @RequiredArgsConstructor
+@Validated
 public class TaskController {
     private final TaskService taskService;
     private final TaskMapper taskMapper;
@@ -29,9 +32,21 @@ public class TaskController {
 
 
     @GetMapping()
-    public List<TaskResponseDto> getAllTasks(@ModelAttribute TaskFilterDto filter) {
-        List<Task> tasks = taskService.searchTasks(filter);
-        return taskMapper.toDto(tasks);
+    public Page<TaskResponseDto> getAllTasks(
+            @ModelAttribute TaskFilterDto filter,
+
+            @RequestParam(defaultValue = "0")
+            @Min(value = 0, message = "Page number must be 0 or greater")
+            int page,
+
+            @RequestParam(defaultValue = "5")
+            @Min(value = 1, message = "Page size must be at least 1")
+            int size,
+            @RequestParam(defaultValue = "ASC") String sortDir,
+            @RequestParam(defaultValue = "id") String sortField
+    ) {
+        Page<Task> taskPage = taskService.searchTasks(filter, page, size, sortDir, sortField);
+        return taskPage.map(taskMapper::toDto);
     }
 
 

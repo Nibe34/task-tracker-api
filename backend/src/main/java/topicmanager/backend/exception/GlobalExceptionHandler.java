@@ -1,7 +1,8 @@
 package topicmanager.backend.exception;
 
 
-import org.springframework.beans.TypeMismatchException;
+import jakarta.validation.ConstraintViolationException;
+import org.springframework.data.core.PropertyReferenceException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
@@ -10,10 +11,8 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {
@@ -77,6 +76,22 @@ public class GlobalExceptionHandler {
         Map<String, String> errorResponse = new HashMap<>();
         errorResponse.put("error", ex.getMessage());
         return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
+    }
+
+
+    @ExceptionHandler(ConstraintViolationException.class)
+    public ResponseEntity<Map<String, String>> handleConstraintViolationException(ConstraintViolationException ex) {
+        return ResponseEntity
+                .status(HttpStatus.BAD_REQUEST)
+                .body(Map.of("error", ex.getMessage()));
+    }
+
+
+    @ExceptionHandler(InvalidSortDirectionException.class)
+    public ResponseEntity<Map<String, String>> handleInvalidSortDirectionException(InvalidSortDirectionException ex) {
+        return ResponseEntity
+                .status(HttpStatus.BAD_REQUEST)
+                .body(Map.of("error", ex.getMessage()));
     }
 
 

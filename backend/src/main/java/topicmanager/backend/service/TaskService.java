@@ -2,12 +2,17 @@ package topicmanager.backend.service;
 
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import topicmanager.backend.dto.TaskCreateDto;
 import topicmanager.backend.dto.TaskFilterDto;
 import topicmanager.backend.dto.TaskUpdateDto;
 import topicmanager.backend.exception.EmptyPatchException;
+import topicmanager.backend.exception.InvalidSortDirectionException;
 import topicmanager.backend.exception.TaskNotFoundException;
 import topicmanager.backend.mapper.TaskMapperImpl;
 import topicmanager.backend.model.Status;
@@ -40,18 +45,27 @@ public class TaskService {
         return taskRepository.findAll();
     }
 
-    public List<Task> searchTasks(TaskFilterDto filter) {
+    public Page<Task> searchTasks(TaskFilterDto filter, int page, int size, String sortDir, String sortField) {
+        Sort.Direction sortDirection;
+        try {
+            sortDirection = Sort.Direction.fromString(sortDir);
+        } catch (IllegalArgumentException e) {
+            throw new InvalidSortDirectionException(sortDir);
+        }
+
+
+        Pageable pageable = PageRequest.of(page, size, Sort.by(sortDirection, sortField));
+
         if (filter == null) {
-            return taskRepository.findAll();
+            return taskRepository.findAll(pageable);
         }
 
         String titleParam = null;
-
         if (filter.title() != null && !filter.title().isBlank()) {
             titleParam = "%" + filter.title().toLowerCase() + "%";
         }
 
-        return taskRepository.searchTasks(titleParam, filter.status());
+        return taskRepository.searchTasks(titleParam, filter.status(), pageable);
     }
 
 
