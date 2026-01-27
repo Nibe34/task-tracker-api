@@ -13,6 +13,7 @@ import topicmanager.backend.dto.TaskFilterDto;
 import topicmanager.backend.dto.TaskUpdateDto;
 import topicmanager.backend.exception.EmptyPatchException;
 import topicmanager.backend.exception.InvalidSortDirectionException;
+import topicmanager.backend.exception.InvalidSortFieldException;
 import topicmanager.backend.exception.TaskNotFoundException;
 import topicmanager.backend.mapper.TaskMapperImpl;
 import topicmanager.backend.model.Status;
@@ -20,6 +21,7 @@ import topicmanager.backend.model.Task;
 import topicmanager.backend.repository.TaskRepository;
 
 import java.util.List;
+import java.util.Set;
 
 @Service
 @RequiredArgsConstructor
@@ -27,6 +29,10 @@ import java.util.List;
 public class TaskService {
     private final TaskRepository taskRepository;
     private final TaskMapperImpl taskMapperImpl;
+
+    private static final Set<String> ALLOWED_SORT_FIELDS = Set.of(
+            "id", "title", "description", "status", "createdAt", "completedAt"
+    );
 
     @Transactional
     public Task save(Task task) {
@@ -46,6 +52,11 @@ public class TaskService {
     }
 
     public Page<Task> searchTasks(TaskFilterDto filter, int page, int size, String sortDir, String sortField) {
+
+        if (!ALLOWED_SORT_FIELDS.contains(sortField)) {
+            throw new InvalidSortFieldException(sortField, ALLOWED_SORT_FIELDS);
+        }
+
         Sort.Direction sortDirection;
         try {
             sortDirection = Sort.Direction.fromString(sortDir);

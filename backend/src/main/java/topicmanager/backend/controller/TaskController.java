@@ -2,6 +2,7 @@ package topicmanager.backend.controller;
 
 
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -41,6 +42,7 @@ public class TaskController {
 
             @RequestParam(defaultValue = "5")
             @Min(value = 1, message = "Page size must be at least 1")
+            @Max(value = 20, message = "Page size must mot exceed 20")
             int size,
             @RequestParam(defaultValue = "ASC") String sortDir,
             @RequestParam(defaultValue = "id") String sortField
