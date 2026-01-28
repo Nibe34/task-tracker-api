@@ -17,7 +17,7 @@ import java.util.List;
 @Repository
 public interface TaskRepository extends JpaRepository<Task, Long> {
 
-    @Query("SELECT t FROM Task t WHERE" +
+    @Query("SELECT t FROM Task t WHERE " +
             "(:title IS NULL OR LOWER(t.title) LIKE :title)" +
             " AND " +
             "(:status IS NULL OR :status = t.status)"

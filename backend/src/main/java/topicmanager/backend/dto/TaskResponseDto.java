@@ -11,6 +11,6 @@ public record TaskResponseDto(
         String description,
         Status status,
         Instant createdAt,
-        Instant updatedAt
+        Instant completedAt
 ) {
 }

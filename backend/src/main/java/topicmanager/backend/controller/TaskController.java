@@ -26,8 +26,7 @@ public class TaskController {
 
     @PostMapping()
     public TaskResponseDto createTask(@RequestBody @Valid TaskCreateDto taskCreateDto) {
-        Task task = taskMapper.toEntity(taskCreateDto);
-        Task savedTask = taskService.save(task);
+        Task savedTask = taskService.save(taskCreateDto);
         return taskMapper.toDto(savedTask);
     }
 

@@ -38,6 +38,15 @@ public class Task {
 
 
 
+    public static Task create(String title, String description) {
+        Task task = new Task();
+        task.title = title;
+        task.description = description;
+        task.status = Status.TODO;
+        return task;
+    }
+
+
     public void changeStatus(Status newStatus) {
         if (newStatus == this.status) {
             return;

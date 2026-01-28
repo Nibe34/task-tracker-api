@@ -3,6 +3,7 @@ package topicmanager.backend.config;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Service;
+import topicmanager.backend.dto.TaskCreateDto;
 import topicmanager.backend.model.Status;
 import topicmanager.backend.model.Task;
 import topicmanager.backend.repository.TaskRepository;
@@ -21,38 +22,15 @@ public class InitiateUtils implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        Task task1 = new Task();
-        task1.setTitle("Task 1");
-        task1.setDescription("desc 1");
+        TaskCreateDto task1 = new TaskCreateDto("Task 1", "desc 1");
+        TaskCreateDto task2 = new TaskCreateDto("Task 2", "desc 2");
+        TaskCreateDto task3 = new TaskCreateDto("Task 3", "desc 3");
+        TaskCreateDto task4 = new TaskCreateDto("Task 4", "desc 4");
+        TaskCreateDto task5 = new TaskCreateDto("Task 5", "desc 5");
+        TaskCreateDto task6 = new TaskCreateDto("Task 6", "desc 6");
+        TaskCreateDto task7 = new TaskCreateDto("Task 7", "desc 7");
+        TaskCreateDto task8 = new TaskCreateDto("Task 8", "desc 8");
 
-        Task task2 = new Task();
-        task2.setTitle("Task 2");
-        task2.setDescription("desc 2");
-
-        Task task3 = new Task();
-        task3.setTitle("Task 3");
-        task3.setDescription("desc 3");
-
-
-        Task task4 = new Task();
-        task4.setTitle("Task 4");
-        task4.setDescription("desc 4");
-
-        Task task5 = new Task();
-        task5.setTitle("Task 5");
-        task5.setDescription("desc 5");
-
-        Task task6 = new Task();
-        task6.setTitle("Task 6");
-        task6.setDescription("desc 6");
-
-        Task task7 = new Task();
-        task7.setTitle("Task 7");
-        task7.setDescription("desc 7");
-
-        Task task8 = new Task();
-        task8.setTitle("Task 8");
-        task8.setDescription("desc 8");
 
 
 
@@ -68,19 +46,6 @@ public class InitiateUtils implements CommandLineRunner {
 
 
 
-
-        taskRepository.forceUpdateCreatedAt(task1.getId(), Instant.now().minus(1, ChronoUnit.DAYS));
-        taskRepository.forceUpdateCreatedAt(task2.getId(), Instant.now().minus(5, ChronoUnit.DAYS));
-        taskRepository.forceUpdateCreatedAt(task3.getId(), Instant.now().minus(2, ChronoUnit.DAYS));
-        taskRepository.forceUpdateCreatedAt(task4.getId(), Instant.now().minus(6, ChronoUnit.DAYS));
-        taskRepository.forceUpdateCreatedAt(task5.getId(), Instant.now().minus(3, ChronoUnit.DAYS));
-        taskRepository.forceUpdateCreatedAt(task6.getId(), Instant.now().minus(7, ChronoUnit.DAYS));
-        taskRepository.forceUpdateCreatedAt(task7.getId(), Instant.now().minus(4, ChronoUnit.DAYS));
-        taskRepository.forceUpdateCreatedAt(task8.getId(), Instant.now().minus(8, ChronoUnit.DAYS));
-
-
-
-
         taskService.updateStatus((long)1, Status.IN_PROGRESS);
         taskService.updateStatus((long)3, Status.DONE);
         taskService.updateStatus((long)4, Status.IN_PROGRESS);
@@ -89,6 +54,7 @@ public class InitiateUtils implements CommandLineRunner {
         List<Task> tasks = taskService.findAll();
 
         for (Task task : tasks) {
+            taskRepository.forceUpdateCreatedAt(task.getId(), Instant.now().minus(task.getId(), ChronoUnit.DAYS));
             System.out.println(task);
         }
     }

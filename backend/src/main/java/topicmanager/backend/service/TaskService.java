@@ -15,7 +15,7 @@ import topicmanager.backend.exception.EmptyPatchException;
 import topicmanager.backend.exception.InvalidSortDirectionException;
 import topicmanager.backend.exception.InvalidSortFieldException;
 import topicmanager.backend.exception.TaskNotFoundException;
-import topicmanager.backend.mapper.TaskMapperImpl;
+import topicmanager.backend.mapper.TaskMapper;
 import topicmanager.backend.model.Status;
 import topicmanager.backend.model.Task;
 import topicmanager.backend.repository.TaskRepository;
@@ -28,15 +28,15 @@ import java.util.Set;
 @Transactional(readOnly = true)
 public class TaskService {
     private final TaskRepository taskRepository;
-    private final TaskMapperImpl taskMapperImpl;
+    private final TaskMapper taskMapper;
 
     private static final Set<String> ALLOWED_SORT_FIELDS = Set.of(
             "id", "title", "description", "status", "createdAt", "completedAt"
     );
 
     @Transactional
-    public Task save(Task task) {
-        task.setStatus(Status.TODO);
+    public Task save(TaskCreateDto dto) {
+        Task task = Task.create(dto.title(), dto.description());
         return taskRepository.save(task);
     }
 
@@ -86,19 +86,22 @@ public class TaskService {
     }
 
 
+    @Transactional
     public void delete(Long id) {
         Task task = findById(id);
         taskRepository.delete(task);
     }
 
+/*
+// TODO: наразі не використовується
 
     @Transactional
     public Task update(Long id, TaskCreateDto taskCreateDto) {
         Task task = findById(id);
-        taskMapperImpl.updateEntityFromDto(taskCreateDto, task);
+        taskMapper.updateEntityFromDto(taskCreateDto, task);
         return taskRepository.save(task);
     }
-
+*/
 
     @Transactional
     public Task updateStatus(Long taskId, Status newStatus) {
