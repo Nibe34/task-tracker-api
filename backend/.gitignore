@@ -4,6 +4,10 @@ target/
 !**/src/main/**/target/
 !**/src/test/**/target/
 
+### enviroment settings ###
+application.properties
+docker-compose.yaml
+
 ### STS ###
 .apt_generated
 .classpath
