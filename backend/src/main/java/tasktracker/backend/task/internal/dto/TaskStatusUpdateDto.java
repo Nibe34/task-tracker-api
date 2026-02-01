@@ -1,8 +1,8 @@
-package tasktracker.backend.dto;
+package tasktracker.backend.task.internal.dto;
 
 
 import jakarta.validation.constraints.NotNull;
-import tasktracker.backend.model.Status;
+import tasktracker.backend.task.internal.model.Status;
 
 public record TaskStatusUpdateDto(
         @NotNull(message = "Status is required")

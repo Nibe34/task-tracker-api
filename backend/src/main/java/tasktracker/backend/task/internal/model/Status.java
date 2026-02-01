@@ -1,4 +1,4 @@
-package tasktracker.backend.model;
+package tasktracker.backend.task.internal.model;
 
 
 import lombok.Getter;

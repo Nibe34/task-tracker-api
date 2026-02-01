@@ -1,4 +1,4 @@
-package tasktracker.backend.controller;
+package tasktracker.backend.task.internal.controller;
 
 
 import jakarta.validation.Valid;
@@ -9,10 +9,10 @@ import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import tasktracker.backend.dto.*;
-import tasktracker.backend.mapper.TaskMapper;
-import tasktracker.backend.model.Task;
-import tasktracker.backend.service.TaskService;
+import tasktracker.backend.task.TaskService;
+import tasktracker.backend.task.internal.dto.*;
+import tasktracker.backend.task.internal.mapper.TaskMapper;
+import tasktracker.backend.task.internal.model.Task;
 
 
 @RestController

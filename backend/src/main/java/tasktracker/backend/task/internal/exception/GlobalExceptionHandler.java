@@ -1,4 +1,4 @@
-package tasktracker.backend.exception;
+package tasktracker.backend.task.internal.exception;
 
 
 import jakarta.validation.ConstraintViolationException;
@@ -10,7 +10,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
-import tasktracker.backend.dto.ErrorResponse;
+import tasktracker.backend.task.internal.dto.ErrorResponse;
 
 import java.util.HashMap;
 import java.util.Map;
