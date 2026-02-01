@@ -96,7 +96,7 @@ Custom exceptions are implemented according to domain rules, such as:
 
 and others.
 
-## 6. Running thr project locally
+## 6. Running the project locally
 #### Prerequisites
 - Java 21
 - Maven
