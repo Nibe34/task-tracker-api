@@ -1,11 +1,11 @@
-package tasktracker.backend.mapper;
+package tasktracker.backend.task.internal.mapper;
 
 
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingTarget;
-import tasktracker.backend.dto.TaskCreateDto;
-import tasktracker.backend.dto.TaskResponseDto;
-import tasktracker.backend.model.Task;
+import tasktracker.backend.task.internal.dto.TaskCreateDto;
+import tasktracker.backend.task.internal.dto.TaskResponseDto;
+import tasktracker.backend.task.internal.model.Task;
 
 import java.util.List;
 

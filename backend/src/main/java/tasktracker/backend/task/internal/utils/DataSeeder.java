@@ -1,13 +1,13 @@
-package tasktracker.backend.config;
+package tasktracker.backend.task.internal.utils;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Service;
-import tasktracker.backend.dto.TaskCreateDto;
-import tasktracker.backend.model.Status;
-import tasktracker.backend.model.Task;
-import tasktracker.backend.repository.TaskRepository;
-import tasktracker.backend.service.TaskService;
+import tasktracker.backend.task.internal.dto.TaskCreateDto;
+import tasktracker.backend.task.internal.model.Status;
+import tasktracker.backend.task.internal.model.Task;
+import tasktracker.backend.task.internal.repository.TaskRepository;
+import tasktracker.backend.task.TaskService;
 
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
@@ -15,7 +15,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class InitiateUtils implements CommandLineRunner {
+public class DataSeeder implements CommandLineRunner {
     private final TaskService taskService;
     private final TaskRepository taskRepository;
 

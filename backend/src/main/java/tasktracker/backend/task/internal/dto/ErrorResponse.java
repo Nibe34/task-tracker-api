@@ -1,4 +1,4 @@
-package tasktracker.backend.dto;
+package tasktracker.backend.task.internal.dto;
 
 
 public record ErrorResponse(

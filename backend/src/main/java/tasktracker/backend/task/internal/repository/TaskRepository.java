@@ -1,4 +1,4 @@
-package tasktracker.backend.repository;
+package tasktracker.backend.task.internal.repository;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -8,8 +8,8 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-import tasktracker.backend.model.Status;
-import tasktracker.backend.model.Task;
+import tasktracker.backend.task.internal.model.Status;
+import tasktracker.backend.task.internal.model.Task;
 
 import java.time.Instant;
 

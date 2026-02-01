@@ -1,4 +1,4 @@
-package tasktracker.backend.exception;
+package tasktracker.backend.task.internal.exception;
 
 
 public class InvalidSortDirectionException extends RuntimeException {

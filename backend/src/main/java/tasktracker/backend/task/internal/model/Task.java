@@ -1,11 +1,11 @@
-package tasktracker.backend.model;
+package tasktracker.backend.task.internal.model;
 
 
 import jakarta.persistence.*;
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
-import tasktracker.backend.exception.CannotEditTaskInCurrentStatusException;
-import tasktracker.backend.exception.InvalidTaskStatusTransitionException;
+import tasktracker.backend.task.internal.exception.CannotEditTaskInCurrentStatusException;
+import tasktracker.backend.task.internal.exception.InvalidTaskStatusTransitionException;
 
 import java.time.Instant;
 

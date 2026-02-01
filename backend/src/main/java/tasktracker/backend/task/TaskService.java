@@ -1,4 +1,4 @@
-package tasktracker.backend.service;
+package tasktracker.backend.task;
 
 
 import lombok.RequiredArgsConstructor;
@@ -8,17 +8,17 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import tasktracker.backend.dto.TaskCreateDto;
-import tasktracker.backend.dto.TaskFilterDto;
-import tasktracker.backend.dto.TaskUpdateDto;
-import tasktracker.backend.exception.EmptyPatchException;
-import tasktracker.backend.exception.InvalidSortDirectionException;
-import tasktracker.backend.exception.InvalidSortFieldException;
-import tasktracker.backend.exception.TaskNotFoundException;
-import tasktracker.backend.mapper.TaskMapper;
-import tasktracker.backend.model.Status;
-import tasktracker.backend.model.Task;
-import tasktracker.backend.repository.TaskRepository;
+import tasktracker.backend.task.internal.dto.TaskCreateDto;
+import tasktracker.backend.task.internal.dto.TaskFilterDto;
+import tasktracker.backend.task.internal.dto.TaskUpdateDto;
+import tasktracker.backend.task.internal.exception.EmptyPatchException;
+import tasktracker.backend.task.internal.exception.InvalidSortDirectionException;
+import tasktracker.backend.task.internal.exception.InvalidSortFieldException;
+import tasktracker.backend.task.internal.exception.TaskNotFoundException;
+import tasktracker.backend.task.internal.mapper.TaskMapper;
+import tasktracker.backend.task.internal.model.Status;
+import tasktracker.backend.task.internal.model.Task;
+import tasktracker.backend.task.internal.repository.TaskRepository;
 
 import java.util.List;
 import java.util.Set;

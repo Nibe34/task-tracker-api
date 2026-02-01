@@ -1,7 +1,7 @@
-package tasktracker.backend.dto;
+package tasktracker.backend.task.internal.dto;
 
 
-import tasktracker.backend.model.Status;
+import tasktracker.backend.task.internal.model.Status;
 
 import java.time.Instant;
 

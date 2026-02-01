@@ -1,7 +1,7 @@
-package tasktracker.backend.exception;
+package tasktracker.backend.task.internal.exception;
 
 
-import tasktracker.backend.model.Status;
+import tasktracker.backend.task.internal.model.Status;
 
 public class InvalidTaskStatusTransitionException extends RuntimeException {
     public InvalidTaskStatusTransitionException(Status status, Status newStatus) {

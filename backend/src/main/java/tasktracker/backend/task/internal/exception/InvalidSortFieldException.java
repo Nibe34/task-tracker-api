@@ -1,4 +1,4 @@
-package tasktracker.backend.exception;
+package tasktracker.backend.task.internal.exception;
 
 
 import java.util.Set;

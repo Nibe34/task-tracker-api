@@ -1,4 +1,4 @@
-package tasktracker.backend.dto;
+package tasktracker.backend.task.internal.dto;
 
 
 import jakarta.validation.constraints.NotBlank;
