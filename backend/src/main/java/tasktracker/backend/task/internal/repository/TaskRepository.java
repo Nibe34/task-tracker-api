@@ -8,8 +8,8 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-import tasktracker.backend.task.internal.model.Status;
-import tasktracker.backend.task.internal.model.Task;
+import tasktracker.backend.task.internal.domain.Status;
+import tasktracker.backend.task.internal.domain.Task;
 
 import java.time.Instant;
 

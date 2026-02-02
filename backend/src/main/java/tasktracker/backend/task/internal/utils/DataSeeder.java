@@ -4,8 +4,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Service;
 import tasktracker.backend.task.internal.dto.TaskCreateDto;
-import tasktracker.backend.task.internal.model.Status;
-import tasktracker.backend.task.internal.model.Task;
+import tasktracker.backend.task.internal.domain.Status;
+import tasktracker.backend.task.internal.domain.Task;
 import tasktracker.backend.task.internal.repository.TaskRepository;
 import tasktracker.backend.task.TaskService;
 

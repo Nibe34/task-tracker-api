@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import tasktracker.backend.task.TaskService;
 import tasktracker.backend.task.internal.dto.*;
 import tasktracker.backend.task.internal.mapper.TaskMapper;
-import tasktracker.backend.task.internal.model.Task;
+import tasktracker.backend.task.internal.domain.Task;
 
 
 @RestController

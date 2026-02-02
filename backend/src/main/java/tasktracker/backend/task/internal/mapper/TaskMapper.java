@@ -5,7 +5,7 @@ import org.mapstruct.Mapper;
 import org.mapstruct.MappingTarget;
 import tasktracker.backend.task.internal.dto.TaskCreateDto;
 import tasktracker.backend.task.internal.dto.TaskResponseDto;
-import tasktracker.backend.task.internal.model.Task;
+import tasktracker.backend.task.internal.domain.Task;
 
 import java.util.List;
 

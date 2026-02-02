@@ -1,4 +1,4 @@
-package tasktracker.backend.task.internal.model;
+package tasktracker.backend.task.internal.domain;
 
 
 import jakarta.persistence.*;
@@ -14,7 +14,7 @@ import java.time.Instant;
 @Data
 public class Task {
     @Id
-    @Column(name = "id_title")
+    @Column
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 

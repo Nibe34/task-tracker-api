@@ -2,7 +2,7 @@ package tasktracker.backend.task.internal.dto;
 
 
 import jakarta.validation.constraints.NotNull;
-import tasktracker.backend.task.internal.model.Status;
+import tasktracker.backend.task.internal.domain.Status;
 
 public record TaskStatusUpdateDto(
         @NotNull(message = "Status is required")

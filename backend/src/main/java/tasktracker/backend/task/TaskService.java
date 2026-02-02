@@ -16,8 +16,8 @@ import tasktracker.backend.task.internal.exception.InvalidSortDirectionException
 import tasktracker.backend.task.internal.exception.InvalidSortFieldException;
 import tasktracker.backend.task.internal.exception.TaskNotFoundException;
 import tasktracker.backend.task.internal.mapper.TaskMapper;
-import tasktracker.backend.task.internal.model.Status;
-import tasktracker.backend.task.internal.model.Task;
+import tasktracker.backend.task.internal.domain.Status;
+import tasktracker.backend.task.internal.domain.Task;
 import tasktracker.backend.task.internal.repository.TaskRepository;
 
 import java.util.List;
