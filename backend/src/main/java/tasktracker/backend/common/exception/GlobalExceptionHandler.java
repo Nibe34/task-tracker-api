@@ -1,4 +1,4 @@
-package tasktracker.backend.task.internal.exception;
+package tasktracker.backend.common.exception;
 
 
 import jakarta.validation.ConstraintViolationException;
@@ -10,7 +10,9 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
-import tasktracker.backend.task.internal.dto.ErrorResponse;
+import tasktracker.backend.common.dto.ErrorResponse;
+import tasktracker.backend.task.internal.exception.*;
+import tasktracker.backend.user.internal.exception.UserNotFoundException;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -62,8 +64,11 @@ public class GlobalExceptionHandler {
 
 
 
-    @ExceptionHandler(TaskNotFoundException.class)
-    public ResponseEntity<ErrorResponse> handleTaskNotFoundException(TaskNotFoundException ex) {
+    @ExceptionHandler({
+            TaskNotFoundException.class,
+            UserNotFoundException.class
+    })
+    public ResponseEntity<ErrorResponse> handleNotFoundException(TaskNotFoundException ex) {
         return ResponseEntity
                 .status(HttpStatus.NOT_FOUND)
                 .body(new ErrorResponse(ex.getMessage()));

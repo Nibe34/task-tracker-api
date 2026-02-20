@@ -35,4 +35,16 @@ public class User {
         user.email = email;
         return user;
     }
+
+
+
+
+    public void changeUsername(String newUsername) {
+        this.username = newUsername;
+    }
+
+
+    public void changeEmail(String newEmail) {
+        this.email = newEmail;
+    }
 }
